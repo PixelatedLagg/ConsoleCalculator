@@ -117,22 +117,10 @@ class Program
                 }
                 Console.WriteLine(result / args.Length - 1);
                 return;
-                    /*case string median_ when median_.Contains("median"):
-                        input = input.Replace("median ", "");
-                        double[] median = Array.ConvertAll(input.Split(' '), Double.Parse);
-                        if (CheckNumbers(20, median) == false)
-                        {
-                            return;
-                        }
-                        if (CheckNumbersDown(2, median) == false)
-                        {
-                            return;
-                        }
-                        Array.Sort(median);
-                        answer = (median.Length % 2 != 0) ? median[median.Length / 2] : ((double)median[median.Length / 2] + (double)median[(median.Length / 2) - 1]) / 2;
-                        Console.WriteLine(answer);
-                        break;
-                    case string mode_ when mode_.Contains("mode"):
+            case "median":
+                Console.WriteLine(((args.Length - 1) % 2 != 0) ? args[(args.Length) / 2] : (Convert.ToDouble(args[(args.Length - 1) / 2]) + Convert.ToDouble(args[((args.Length - 1) / 2)])) / 2);
+                break;
+                    /*case string mode_ when mode_.Contains("mode"):
                         input = input.Replace("mode ", "");
                         double[] mode = Array.ConvertAll(input.Split(' '), Double.Parse);
                         if (CheckNumbers(20, mode) == false)
