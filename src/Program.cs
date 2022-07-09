@@ -4,6 +4,13 @@ class Program
 {
     public static void Main(string[] args)
     {
+        /*string[] test = {"range"}
+        double max = Convert.ToDouble(args[i]), min = 0;
+        for (int i = 1; i < args.Length; i++)
+        {
+            if (Convert.ToDouble(args[i]))
+        }
+        return;*/
         if (args.Length == 0)
         {
             Loop();
@@ -111,110 +118,110 @@ class Program
                 }
                 return;
             case "mean":
+                if (args.Length < 3)
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Invalid parameters.");
+                    Console.BackgroundColor = ConsoleColor.Black;
+                }
                 for (int i = 1; i < args.Length; i++)
                 {
                     result += Convert.ToDouble(args[i]);
                 }
-                Console.WriteLine(result / args.Length - 1);
+                Console.WriteLine(result / (args.Length - 1));
                 return;
             case "median":
-                Console.WriteLine(((args.Length - 1) % 2 != 0) ? args[(args.Length) / 2] : (Convert.ToDouble(args[(args.Length - 1) / 2]) + Convert.ToDouble(args[((args.Length - 1) / 2)])) / 2);
+                if (args.Length < 3)
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Invalid parameters.");
+                    Console.BackgroundColor = ConsoleColor.Black;
+                }
+                Console.WriteLine(((args.Length - 1) % 2 != 0) ? args[(int)(args.Length / 2 + 0.5)] : ((Convert.ToDouble(args[(int)(args.Length / 2 + 0.5)]) + Convert.ToDouble(args[(int)(args.Length / 2 + 1.5)])) / 2.0));
                 break;
-                    /*case string mode_ when mode_.Contains("mode"):
-                        input = input.Replace("mode ", "");
-                        double[] mode = Array.ConvertAll(input.Split(' '), Double.Parse);
-                        if (CheckNumbers(20, mode) == false)
-                        {
-                            return;
-                        }
-                        if (CheckNumbersDown(2, mode) == false) 
-                        {
-                            return;
-                        }
-                        answer = mode.GroupBy(x => x).OrderByDescending(x => x.Count()).First().Key;
-                        Console.WriteLine(answer);
-                        break;
-                    case string range_ when range_.Contains("range"):
-                        input = input.Replace("range ", "");
-                        double[] range = Array.ConvertAll(input.Split(' '), Double.Parse);
-                        if (CheckNumbers(20, range) == false)
-                        {
-                            return;
-                        }
-                        if (CheckNumbersDown(2, range) == false)
-                        {
-                            return;
-                        }
-                        answer = range.Max() - range.Min();
-                        Console.WriteLine(answer);
-                        break;
-                    case string percent_ when percent_.Contains("percent"):
-                        input = input.Replace("percent ", "");
-                        if (input.Contains("0."))
-                        {
-                            Console.WriteLine(Convert.ToDouble(input) * 100 + "%");
-                            break;
-                        }
-                        double[] percent = Array.ConvertAll(input.Split('/'), Double.Parse);
-                        if (CheckNumbers(2, percent) == false)
-                        {
-                            return;
-                        }
-                        if (CheckNumbersDown(2, percent) == false) 
-                        {
-                            return;
-                        }
-                        answer = (percent.First() / percent.Last()) * 100;
-                        Console.WriteLine($"{answer}%");
-                        break;
-                    case string decimal_ when decimal_.Contains("decimal"):
-                        input = input.Replace("decimal ", "");
-                        if (input.Contains("%"))
-                        {
-                            input = input.Replace("%", "");
-                            Console.WriteLine(Convert.ToDouble(input) / 100);
-                            break;
-                        }
-                        double[] deci = Array.ConvertAll(input.Split('/'), Double.Parse);
-                        if (CheckNumbers(2, deci) == false)
-                        {
-                            return;
-                        }
-                        if (CheckNumbersDown(2, deci) == false)
-                        {
-                            return;
-                        }
-                        answer = deci.First() / deci.Last();
-                        Console.WriteLine(answer);
-                        break;
-                    case string fraction_ when fraction_.Contains("fraction"):
-                        input = input.Replace("fraction ", "");
-                        if (input.Contains("%"))
-                        {
-                            input = input.Replace("%", "");
-                            Console.WriteLine(Convert.ToDouble(input) + "/100");
-                            break;
-                        }
-                        string[] array = input.Split('.');
-                        string[] array2 = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
-                        if (array2.Any(s => array[0].Contains(s)))
-                        {
-                            Console.WriteLine("Decimal must be below 1!");
-                            break;
-                        }
-                        foreach (char c in input)
-                        {
-                            if (c == '0' && Convert.ToDouble(input) == Convert.ToDouble(input.Replace(c.ToString(), "")))
-                            {
-                                input = input.Replace(c.ToString(), "");
-                            }
-                        }
-                        input = input.Replace("0.", "");
-                        input = input.Replace(".", "");
-                        string temp = "";
-                        for (int i = 0; i < input.Length; i++) { temp = $"{temp}0"; }
-                        Console.WriteLine($"{input}/1{temp}");
-                        break;*/
+            case "mode":
+                if (args.Length < 3)
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Invalid parameters.");
+                    Console.BackgroundColor = ConsoleColor.Black;
+                }
+                Console.WriteLine(args.GroupBy(x => x).OrderByDescending(x => x.Count()).First().Key);
+                break;
+            case "range":
+                double max = Convert.ToDouble(args[0]), min = Convert.ToDouble(args[1]);
+                for (int i = 1; i < args.Length; i++)
+                {
+                    //if (Convert.ToDouble(args[i]))
+                }
+                break;
+            /*case string percent_ when percent_.Contains("percent"):
+                input = input.Replace("percent ", "");
+                if (input.Contains("0."))
+                {
+                    Console.WriteLine(Convert.ToDouble(input) * 100 + "%");
+                    break;
+                }
+                double[] percent = Array.ConvertAll(input.Split('/'), Double.Parse);
+                if (CheckNumbers(2, percent) == false)
+                {
+                    return;
+                }
+                if (CheckNumbersDown(2, percent) == false) 
+                {
+                    return;
+                }
+                answer = (percent.First() / percent.Last()) * 100;
+                Console.WriteLine($"{answer}%");
+                break;
+            case string decimal_ when decimal_.Contains("decimal"):
+                input = input.Replace("decimal ", "");
+                if (input.Contains("%"))
+                {
+                    input = input.Replace("%", "");
+                    Console.WriteLine(Convert.ToDouble(input) / 100);
+                    break;
+                }
+                double[] deci = Array.ConvertAll(input.Split('/'), Double.Parse);
+                if (CheckNumbers(2, deci) == false)
+                {
+                    return;
+                }
+                if (CheckNumbersDown(2, deci) == false)
+                {
+                    return;
+                }
+                answer = deci.First() / deci.Last();
+                Console.WriteLine(answer);
+                break;
+            case string fraction_ when fraction_.Contains("fraction"):
+                input = input.Replace("fraction ", "");
+                if (input.Contains("%"))
+                {
+                    input = input.Replace("%", "");
+                    Console.WriteLine(Convert.ToDouble(input) + "/100");
+                    break;
+                }
+                string[] array = input.Split('.');
+                string[] array2 = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+                if (array2.Any(s => array[0].Contains(s)))
+                {
+                    Console.WriteLine("Decimal must be below 1!");
+                    break;
+                }
+                foreach (char c in input)
+                {
+                    if (c == '0' && Convert.ToDouble(input) == Convert.ToDouble(input.Replace(c.ToString(), "")))
+                    {
+                        input = input.Replace(c.ToString(), "");
+                    }
+                }
+                input = input.Replace("0.", "");
+                input = input.Replace(".", "");
+                string temp = "";
+                for (int i = 0; i < input.Length; i++) { temp = $"{temp}0"; }
+                Console.WriteLine($"{input}/1{temp}");
+                break;*/
         }
     }
     static double PythA(double b, double c) => Math.Sqrt((c * c) - (b * b));
