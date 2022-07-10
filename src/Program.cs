@@ -4,18 +4,6 @@ class Program
 {
     public static void Main(string[] args)
     {
-        /*string[] test = {"range"}
-        double max = Convert.ToDouble(args[i]), min = 0;
-        for (int i = 1; i < args.Length; i++)
-        {
-            if (Convert.ToDouble(args[i]))
-        }
-        return;*/
-        if (args.Length == 0)
-        {
-            Loop();
-            return;
-        }
         double result = 0;
         switch (args[0].ToLower())
         {
@@ -149,11 +137,27 @@ class Program
                 Console.WriteLine(args.GroupBy(x => x).OrderByDescending(x => x.Count()).First().Key);
                 break;
             case "range":
-                double max = Convert.ToDouble(args[0]), min = Convert.ToDouble(args[1]);
-                for (int i = 1; i < args.Length; i++)
+                if (args.Length < 3)
                 {
-                    //if (Convert.ToDouble(args[i]))
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Invalid parameters.");
+                    Console.BackgroundColor = ConsoleColor.Black;
                 }
+                double max = Convert.ToDouble(args[1]), min = max;
+                double temp;
+                for (int i = 2; i < args.Length; i++)
+                {
+                    temp = Convert.ToDouble(args[i]);
+                    if (temp > max)
+                    {
+                        max = temp;
+                    }
+                    else if (temp < min)
+                    {
+                        min = temp;
+                    }
+                }
+                Console.WriteLine(max - min);
                 break;
             /*case string percent_ when percent_.Contains("percent"):
                 input = input.Replace("percent ", "");
@@ -237,9 +241,5 @@ class Program
         { 
             return false; 
         } 
-    }
-    static void Loop()
-    {
-
     }
 }
